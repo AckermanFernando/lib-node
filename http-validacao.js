@@ -30,3 +30,17 @@ function geraArrayDeURLs(arrayLinks) {
   );
 }
 
+async function validarURLs(arrayLinks) {
+  const links = geraArrayDeURLs(arrayLinks);
+  const statusLink = await checaStatus(links);
+  const resultados = arrayLinks.map((objeto, indexObjeto) => {
+    const resultadoLinks = objeto.map((links, indexLink) => ({
+      ...links,
+      status: statusLink[indexObjeto][indexLink],
+    }));
+    return resultadoLinks;
+  });
+  return resultados;
+}
+
+export default validarURLs;
